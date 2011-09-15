@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+var MtgoxHook = require('../lib/mtgox').MtgoxHook;
+
+var hook = new MtgoxHook({
+  name: 'mtgox',
+  debug: false
+});
+
+
+hook.start();
