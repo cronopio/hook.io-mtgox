@@ -10,6 +10,8 @@ var hook = new MtgoxHook({
 
 hook.on('children::ready', function(){
 
+  hook.lastPrice = 0;
+
   hook.on('subscribe', function(data){
     console.log('Subscribed to channel: '.green, getChannel(data.channel).name.magenta);
   });
@@ -19,6 +21,7 @@ hook.on('children::ready', function(){
   });
 
   hook.on('trade', function(data){
+    hook.lastPrice = data.trade.price;
     console.log('trade'.magenta, data);
   });
 
@@ -27,7 +30,7 @@ hook.on('children::ready', function(){
   });
 
   hook.on('ticker', function(data){
-    renderTicker(data);
+    renderTicker(data,hook.lastPrice);
   });
 
 });
@@ -114,12 +117,18 @@ _trade: function(trade){
 */
 
 
-var renderTicker = function(tick){
+var renderTicker = function(tick,last){
   var data = tick.ticker;
-  console.log('---------------------');
-  console.log('   Volume: %d      ', data.vol);
-  console.log(' Buy:%d - Sell:%d  ', data.buy, data.sell);
-  console.log(' Max:%d - Min:%d   ', data.high, data.low);
-  console.log(' Last Price: %d    ', this.lastTrade);
-  console.log('---------------------')
+  
+  var lineOne = '   Volume: ' + data.vol.toString().red;
+  lineOne += ' Last Price: ' + last.toString().green.bold;
+  
+  var lineTwo = '   Buy: ' + data.buy.toString().bold;
+  lineTwo += ' Sell: ' + data.sell.toString().bold;
+  
+  var lineThree = ' |  Max: ' + data.high.toString().italic;
+  lineThree += ' Min: ' + data.low.toString().italic;
+  
+  console.log(lineOne);
+  console.log(lineTwo,lineThree);
 }
