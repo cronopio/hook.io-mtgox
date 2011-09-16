@@ -20,3 +20,6 @@ Hook from mtgox to integrate with the rest of hook.io ecosystem
 
 ### Screenshot
 ![Screenshot1](http://i.imgur.com/Zilic.jpg)
+
+Is possible set verbose with `-v` or `--verbose` to see the changes to the order book
+![Screenshot2](http://i.imgur.com/n5rbE.jpg)
