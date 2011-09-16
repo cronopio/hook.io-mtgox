@@ -15,14 +15,16 @@ hook.on('children::ready', function(){
   });
 
   hook.on('private', function(data){
-    console.log(getChannel(data.channel), 'private');
+    //console.log(data, 'private');
+  });
+
+  hook.on('ticker', function(data){
+    console.log('ticker'.blue, data.ticker);
   });
 
 });
 
 hook.start();
-
-
 
 
 var getChannel = function(key){
