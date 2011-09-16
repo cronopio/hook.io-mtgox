@@ -23,7 +23,7 @@ hook.on('children::ready', function(){
   });
 
   hook.on('depth', function(data){
-    console.log('depth'.magenta, data);
+    renderChange(data);
   });
 
   hook.on('ticker', function(data){
@@ -42,6 +42,30 @@ var getChannel = function(key){
     return false;
   });
   return selected[0];
+};
+
+var getTime = function(){
+  var now = new Date();
+  var time = '['+now.getHours()+':'+now.getMinutes()+':'+now.getSeconds()+'] ';
+  return time.blue;
+}
+
+var renderChange = function(depth){
+  var vol, action
+      data = depth.depth,
+      msg = getTime();
+  if (data.volume < 0){
+    // An order has been deleted
+    msg += 'Removed '.grey;
+    vol = (data.volume * -1).toString();
+  } else {
+    // An order has been created
+    msg += 'Created '.grey;
+    vol = data.volume;
+  }
+  msg += data.type_str.bold;
+  msg += ' '+vol.yellow + ' @ '.italic + data.price.green;
+  console.log(msg);
 };
 
 
