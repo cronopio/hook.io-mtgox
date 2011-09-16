@@ -19,7 +19,7 @@ hook.on('children::ready', function(){
   });
 
   hook.on('ticker', function(data){
-    console.log('ticker'.blue, data.ticker);
+    renderTicker(data);
   });
 
 });
@@ -79,9 +79,11 @@ _trade: function(trade){
   this.lastTrade = data.price;
   console.log(msg);
 },
-_ticker: function(tick){
+*/
+
+
+var renderTicker = function(tick){
   var data = tick.ticker;
-  mtgoxTest.emit('ticker', data);
   console.log('---------------------');
   console.log('   Volume: %d      ', data.vol);
   console.log(' Buy:%d - Sell:%d  ', data.buy, data.sell);
@@ -89,4 +91,3 @@ _ticker: function(tick){
   console.log(' Last Price: %d    ', this.lastTrade);
   console.log('---------------------')
 }
-*/
