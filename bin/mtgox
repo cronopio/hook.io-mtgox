@@ -21,8 +21,8 @@ hook.on('children::ready', function(){
   });
 
   hook.on('trade', function(data){
+    renderTrade(data, hook.lastPrice);
     hook.lastPrice = data.trade.price;
-    console.log('trade'.magenta, data);
   });
 
   hook.on('depth', function(data){
@@ -54,7 +54,7 @@ var getTime = function(){
 }
 
 var renderChange = function(depth){
-  var vol, action
+  var vol,
       data = depth.depth,
       msg = getTime();
   if (data.volume < 0){
@@ -71,51 +71,34 @@ var renderChange = function(depth){
   console.log(msg);
 };
 
-
-/*
-,
-showMsg: function(data){
-  var ch = this.getChannel(data.channel);
-  this['_'+ch.private](data);
-},
-_depth: function(depth){
-  var vol,
-      now  = new Date(),
-      data = depth.depth,
-      msg = '<'+now.getHours()+':'+now.getMinutes()+':'+now.getSeconds()+'> ';
-  if (data.volume < 0){
-    // An order has been deleted
-    msg += 'Remove ';
-    vol = data.volume * -1;
-  } else {
-    // An order has been created
-    msg += 'Create ';
-    vol = data.volume;
-  }
-  msg += data.type_str + ' ' +vol + ' @ ' + data.price;
-  console.log(msg);
-},
-_trade: function(trade){
+var renderTrade = function(trade,last){
   var data = trade.trade,
-      time = new Date(data.date),
-      msg = '['+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds()+'] ';
-  if (data.trade_type == 'ask'){
-    msg += 'Sell ';      
-  } else if (data.trade_type == 'bid'){
-    msg += 'Buy ';
+      msg = getTime(),
+      btc = data.amount + ' ' + data.item,
+      money = data.price + ' ' + data.price_currency;
+      
+  if (data.trade_type === 'ask'){
+    msg += 'Sell '.grey;
   }
-  msg += data.amount + ' '+data.item+ '  @  '+data.price+' '+data.price_currency;
-  if (data.price > this.lastTrade){
-    msg += ' ⇧ ';
+  
+  if (data.trade_type === 'bid'){
+    msg += 'Buy '.grey;
   }
-  if (data.price < this.lastTrade){
-    msg += ' ⇩ ';
+  
+  msg += btc.yellow + ' @ ';
+  
+  if (data.price > last){  
+    msg += money.green;
+    msg += ' ⇧ '.green.bold;
   }
-  this.lastTrade = data.price;
-  console.log(msg);
-},
-*/
+  
+  if (data.price < last){
+    msg += money.red;
+    msg += ' ⇩ '.red.bold;
+  }
 
+  console.log(msg);
+};
 
 var renderTicker = function(tick,last){
   var data = tick.ticker;
@@ -131,4 +114,4 @@ var renderTicker = function(tick,last){
   
   console.log(lineOne);
   console.log(lineTwo,lineThree);
-}
+};
