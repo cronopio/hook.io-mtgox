@@ -9,42 +9,34 @@ var hook = new MtgoxHook({
 
 
 hook.on('children::ready', function(){
-  hook.on('*::websocket::message',function(message){
-   if(hook.ticker){
-     renderMessage(message);
-   }
+
+  hook.on('subscribe', function(data){
+    console.log('Subscribed to channel: '.green, getChannel(data.channel).name.magenta);
   });
+
+  hook.on('private', function(data){
+    console.log(getChannel(data.channel), 'private');
+  });
+
 });
 
 hook.start();
 
 
-var renderMessage = function(message) {
-  
-  switch (message.op) {
-    case 'private':
-      console.log('private', message);
-    break;
-    case 'subscribe':
-      console.log('subscribe', message);
-    break;
-    default:
-      console.log('default');
-    break;
-  }
-  
-};
 
 
-/*
-getChannel: function(key){
-  var selected = this.channels.filter(function(c){
-    if (c.key == key)
+var getChannel = function(key){
+  var selected = hook.channels.filter(function(c){
+    if (c.key === key)
       return true;
     return false;
   });
   return selected[0];
-},
+};
+
+
+/*
+,
 showMsg: function(data){
   var ch = this.getChannel(data.channel);
   this['_'+ch.private](data);
