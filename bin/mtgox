@@ -96,6 +96,10 @@ var renderTrade = function(trade,last){
     msg += money.red;
     msg += ' ⇩ '.red.bold;
   }
+  
+  if (data.price == last){
+    msg += money;
+  }
 
   console.log(msg.bold);
 };
