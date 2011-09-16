@@ -26,7 +26,8 @@ hook.on('children::ready', function(){
   });
 
   hook.on('depth', function(data){
-    renderChange(data);
+    if (hook.v || hook.verbose)
+      renderChange(data);
   });
 
   hook.on('ticker', function(data){
