@@ -78,11 +78,11 @@ var renderTrade = function(trade,last){
       money = data.price + ' ' + data.price_currency;
       
   if (data.trade_type === 'ask'){
-    msg += 'Sell '.grey;
+    msg += 'Sell ';
   }
   
   if (data.trade_type === 'bid'){
-    msg += 'Buy '.grey;
+    msg += 'Buy ';
   }
   
   msg += btc.yellow + ' @ ';
@@ -97,7 +97,7 @@ var renderTrade = function(trade,last){
     msg += ' ⇩ '.red.bold;
   }
 
-  console.log(msg);
+  console.log(msg.bold);
 };
 
 var renderTicker = function(tick,last){
