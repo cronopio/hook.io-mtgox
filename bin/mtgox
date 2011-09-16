@@ -15,7 +15,15 @@ hook.on('children::ready', function(){
   });
 
   hook.on('private', function(data){
-    //console.log(data, 'private');
+    console.log('private'.magenta, data);
+  });
+
+  hook.on('trade', function(data){
+    console.log('trade'.magenta, data);
+  });
+
+  hook.on('depth', function(data){
+    console.log('depth'.magenta, data);
   });
 
   hook.on('ticker', function(data){
