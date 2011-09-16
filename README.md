@@ -16,7 +16,7 @@ Hook from mtgox to integrate with the rest of hook.io ecosystem
 
 ### Runing
     cd hook.io-mtgox
-    ./bin/mtgox
+    ./bin/ticker
 
 ### Screenshot
 ![Screenshot1](http://i.imgur.com/Zilic.jpg)
