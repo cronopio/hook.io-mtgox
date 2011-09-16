@@ -7,5 +7,4 @@ var hook = new MtgoxHook({
   debug: false
 });
 
-
 hook.start();

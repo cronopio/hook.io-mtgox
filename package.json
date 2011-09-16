@@ -1,0 +1,26 @@
+{
+  "author": "Daniel Aristizabal",
+  "contributors": [
+    {
+      "name": "Marak Squires",
+      "email": "marak.squires@gmail.com"
+    }
+  ],
+  "name": "hook.io-mtgox",
+  "description": "a MtGox hook for hook.io ",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cronopio/hook.io-mtgox.git"
+  },
+  "bin": {
+     "hookio-mtgox": "./bin/mtgox"
+   },
+  "engines": {
+    "node": ">= v0.4.7"
+  },
+  "dependencies": {
+    "hook.io" : "0.7.x"
+  },
+  "devDependencies": {}
+}
