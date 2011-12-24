@@ -2,6 +2,9 @@
 
 Hook from mtgox to integrate with the rest of hook.io ecosystem
 
+This is a branch to fix some inconsistencies with new mtgox api such as https server and to use my branch of hook.io-ws.
+
+Notice local npm installs.
 
 ### Dependencies
 
@@ -9,10 +12,15 @@ Hook from mtgox to integrate with the rest of hook.io ecosystem
 - [hook.io-ws](http://github.com/cronopio/hook.io-ws)
 
 ### Installation
-    git clone git://github.com/cronopio/hook.io-mtgox.git
-    cd hook.io-mtgox
+    git clone git://github.com/polidore/hook.io-mtgox.git
+    git clone git://github.com/polidore/hook.io-ws.git
+    cd hook.io-ws
+    git submodule init
+    git submodule update
+    cd ../hook.io-mtgox
     npm install hook.io
-    npm install hook.io-ws
+    npm install ../hook.io-ws
+    npm install ../hook.io-ws/3rd/socket.io-client
 
 ### Runing
     cd hook.io-mtgox
