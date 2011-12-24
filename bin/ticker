@@ -69,7 +69,7 @@ var renderChange = function(depth){
   }
   msg += data.type_str.bold;
   msg += ' '+vol.yellow + ' @ '.italic + data.price.green;
-  console.log(msg);
+  //console.log(msg);
 };
 
 var renderTrade = function(trade,last){
@@ -102,20 +102,20 @@ var renderTrade = function(trade,last){
     msg += money;
   }
 
-  console.log(msg.bold);
+  //console.log(msg.bold);
 };
 
 var renderTicker = function(tick,last){
   var data = tick.ticker;
   
-  var lineOne = '   Volume: ' + data.vol.toString().red;
-  lineOne += ' Last Price: ' + last.toString().green.bold;
+  var lineOne = '   Volume: ' + data.vol.display.red;
+  lineOne += ' Last Price: ' + data.last.display.green.bold;
   
-  var lineTwo = '   Buy: ' + data.buy.toString().bold;
-  lineTwo += ' Sell: ' + data.sell.toString().bold;
+  var lineTwo = '   Buy: ' + data.buy.display.bold;
+  lineTwo += ' Sell: ' + data.sell.display.bold;
   
-  var lineThree = ' |  Max: ' + data.high.toString().italic;
-  lineThree += ' Min: ' + data.low.toString().italic;
+  var lineThree = ' |  Max: ' + data.high.display.italic;
+  lineThree += ' Min: ' + data.low.display.italic;
   
   console.log(lineOne);
   console.log(lineTwo,lineThree);
